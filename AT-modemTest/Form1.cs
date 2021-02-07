@@ -37,17 +37,25 @@ namespace AT_modemTest
         private void BtnSend_Click(object sender, EventArgs e)
         {
             string cmd = txtCommand.Text;
-            //MySerialPort.Write("AT+GMM\r");
             MySerialPort.Write($"{cmd}\r");
         }
 
-        private static void DataReceivedHandler(
+        private void DataReceivedHandler(
             object sender,
             SerialDataReceivedEventArgs e)
         {
+            txtCommand.Invoke(
+                new Action(() =>
+                {
+                    txtLog.Text += ReadData(sender);
+                    txtCommand.Text = String.Empty;
+                }));
+        }
+
+        static string ReadData(object sender)
+        {
             var sp = (SerialPort)sender;
-            var data = sp.ReadExisting();
-            Console.Write(data);
+            return sp.ReadExisting();
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)

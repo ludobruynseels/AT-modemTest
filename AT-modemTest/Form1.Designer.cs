@@ -30,6 +30,7 @@
         {
             this.btnSend = new System.Windows.Forms.Button();
             this.txtCommand = new System.Windows.Forms.TextBox();
+            this.txtLog = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // btnSend
@@ -49,12 +50,21 @@
             this.txtCommand.Size = new System.Drawing.Size(514, 20);
             this.txtCommand.TabIndex = 2;
             // 
+            // txtLog
+            // 
+            this.txtLog.Location = new System.Drawing.Point(36, 39);
+            this.txtLog.Multiline = true;
+            this.txtLog.Name = "txtLog";
+            this.txtLog.Size = new System.Drawing.Size(595, 386);
+            this.txtLog.TabIndex = 3;
+            // 
             // Form1
             // 
             this.AcceptButton = this.btnSend;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.txtLog);
             this.Controls.Add(this.txtCommand);
             this.Controls.Add(this.btnSend);
             this.Name = "Form1";
@@ -70,6 +80,7 @@
 
         private System.Windows.Forms.Button btnSend;
         private System.Windows.Forms.TextBox txtCommand;
+        private System.Windows.Forms.TextBox txtLog;
     }
 }
 
