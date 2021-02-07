@@ -30,22 +30,24 @@ namespace AT_modemTest
                 WriteTimeout = 500
             };
 
-            MySerialPort.DataReceived += new SerialDataReceivedEventHandler(DataReceivedHandler);
+            MySerialPort.DataReceived += DataReceivedHandler;
             MySerialPort.Open();
         }
 
         private void BtnSend_Click(object sender, EventArgs e)
         {
-            MySerialPort.Write("AT+GMM\r");
+            string cmd = txtCommand.Text;
+            //MySerialPort.Write("AT+GMM\r");
+            MySerialPort.Write($"{cmd}\r");
         }
 
         private static void DataReceivedHandler(
             object sender,
             SerialDataReceivedEventArgs e)
         {
-            SerialPort sp = (SerialPort)sender;
-            string indata = sp.ReadExisting();
-            Console.Write(indata);
+            var sp = (SerialPort)sender;
+            var data = sp.ReadExisting();
+            Console.Write(data);
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
