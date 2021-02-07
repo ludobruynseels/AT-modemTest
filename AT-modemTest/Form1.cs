@@ -2,6 +2,7 @@
 using System.IO.Ports;
 using System.Threading;
 using System.Windows.Forms;
+using ScintillaNET;
 
 namespace AT_modemTest
 {
@@ -16,8 +17,10 @@ namespace AT_modemTest
 
         private void Form1_Load(object sender, EventArgs e)
         {
+                scintilla1.Margins[0].Type = MarginType.Number;
+                scintilla1.Margins[0].Width = 16;
 
-            // Create a new SerialPort object with default settings.
+                // Create a new SerialPort object with default settings.
             MySerialPort = new SerialPort
             {
                 PortName = "COM10",
@@ -47,8 +50,11 @@ namespace AT_modemTest
             txtCommand.Invoke(
                 new Action(() =>
                 {
-                    txtLog.Text += ReadData(sender);
-                    txtCommand.Text = String.Empty;
+                    var data= ReadData(sender);
+                    scintilla1.InsertText(-1, data);
+
+
+                    txtCommand.Text = string.Empty;
                 }));
         }
 

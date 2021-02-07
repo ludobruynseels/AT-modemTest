@@ -30,7 +30,7 @@
         {
             this.btnSend = new System.Windows.Forms.Button();
             this.txtCommand = new System.Windows.Forms.TextBox();
-            this.txtLog = new System.Windows.Forms.TextBox();
+            this.scintilla1 = new ScintillaNET.Scintilla();
             this.SuspendLayout();
             // 
             // btnSend
@@ -50,13 +50,14 @@
             this.txtCommand.Size = new System.Drawing.Size(514, 20);
             this.txtCommand.TabIndex = 2;
             // 
-            // txtLog
+            // scintilla1
             // 
-            this.txtLog.Location = new System.Drawing.Point(36, 39);
-            this.txtLog.Multiline = true;
-            this.txtLog.Name = "txtLog";
-            this.txtLog.Size = new System.Drawing.Size(595, 386);
-            this.txtLog.TabIndex = 3;
+            this.scintilla1.Location = new System.Drawing.Point(36, 39);
+            this.scintilla1.Margin = new System.Windows.Forms.Padding(25);
+            this.scintilla1.Name = "scintilla1";
+            this.scintilla1.ScrollWidth = 500;
+            this.scintilla1.Size = new System.Drawing.Size(595, 386);
+            this.scintilla1.TabIndex = 4;
             // 
             // Form1
             // 
@@ -64,7 +65,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.txtLog);
+            this.Controls.Add(this.scintilla1);
             this.Controls.Add(this.txtCommand);
             this.Controls.Add(this.btnSend);
             this.Name = "Form1";
@@ -80,7 +81,7 @@
 
         private System.Windows.Forms.Button btnSend;
         private System.Windows.Forms.TextBox txtCommand;
-        private System.Windows.Forms.TextBox txtLog;
+        private ScintillaNET.Scintilla scintilla1;
     }
 }
 
