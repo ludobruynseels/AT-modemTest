@@ -51,8 +51,7 @@ namespace AT_modemTest
                 new Action(() =>
                 {
                     var data= ReadData(sender);
-                    scintilla1.InsertText(-1, data);
-
+                    scintilla1. InsertText(scintilla1.Text.Length, data);
 
                     txtCommand.Text = string.Empty;
                 }));
