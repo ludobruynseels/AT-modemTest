@@ -39,7 +39,8 @@ namespace AT_modemTest
 
         private void BtnSend_Click(object sender, EventArgs e)
         {
-            string cmd = txtCommand.Text;
+            var cmd = txtCommand.Text;
+            cmd = cmd.Replace("<^Z>", "\u001A");
             MySerialPort.Write($"{cmd}\r");
         }
 
@@ -68,5 +69,27 @@ namespace AT_modemTest
             MySerialPort.Close();
             Thread.Sleep(500);
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            var s = "\u001a";
+            MySerialPort.Write(s);
+        }
+
+        private void txtCommand_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == '\u001a')
+            {
+               var textbox = (TextBox)sender;
+               textbox.Text += "<^Z>";
+               e.Handled = true;
+            }
+            else
+            {
+                e.Handled = false;
+            }
+        }
+
+
     }
 }
