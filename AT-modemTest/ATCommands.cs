@@ -2,13 +2,14 @@
 using System.IO.Ports;
 using System.Threading;
 using System.Windows.Forms;
+using AT_modemTest.Commands;
 using ScintillaNET;
 
 namespace AT_modemTest
 {
-    public partial class Form1 : Form
+    public partial class AtCommands : Form, IAtCommands
     {
-        public Form1()
+        public AtCommands()
         {
             InitializeComponent();
         }
@@ -39,9 +40,21 @@ namespace AT_modemTest
 
         private void BtnSend_Click(object sender, EventArgs e)
         {
-            var cmd = txtCommand.Text;
-            cmd = cmd.Replace("<^Z>", "\u001A");
-            MySerialPort.Write($"{cmd}\r");
+            var cmdText = txtCommand.Text;
+            if (!cmdText.StartsWith("AT"))
+            {
+               ICommand cmd = new ClearLogCommand(this);
+               cmd.Execute();
+            }
+
+            cmdText = cmdText.Replace("<^Z>", "\u001A");
+            MySerialPort.Write($"{cmdText}\r");
+        }
+
+        public void ClearLog()
+        {
+                scintilla1.ClearAll();
+                txtCommand.Text = string.Empty;
         }
 
         private void DataReceivedHandler(
@@ -81,7 +94,7 @@ namespace AT_modemTest
             if (e.KeyChar == '\u001a')
             {
                var textbox = (TextBox)sender;
-               textbox.Text += "<^Z>";
+               textbox.Text += @"<^Z>";
                e.Handled = true;
             }
             else

@@ -1,6 +1,6 @@
 ﻿namespace AT_modemTest
 {
-    partial class Form1
+    partial class AtCommands
     {
         /// <summary>
         /// Required designer variable.
@@ -72,7 +72,7 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // Form1
+            // ATCommands
             // 
             this.AcceptButton = this.btnSend;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -82,8 +82,8 @@
             this.Controls.Add(this.scintilla1);
             this.Controls.Add(this.txtCommand);
             this.Controls.Add(this.btnSend);
-            this.Name = "Form1";
-            this.Text = "Form1";
+            this.Name = "AtCommands";
+            this.Text = "AT commands";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
