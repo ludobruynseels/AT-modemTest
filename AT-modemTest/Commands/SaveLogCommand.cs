@@ -14,9 +14,9 @@ namespace AT_modemTest.Commands
 
         public void Execute()
         {
-            var path =  System.Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            var path =  Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
 
-            var dialog = new SaveFileDialog() {DefaultExt = "atl", InitialDirectory = path, Filter = "atl files (*.atl)|*.atl|All files (*.*)|*.*", 
+            var dialog = new SaveFileDialog() {DefaultExt = "atl", InitialDirectory = path, Filter = @"at log files (*.atl)|*.atl|All files (*.*)|*.*", 
                 FilterIndex = 1, RestoreDirectory = true , CheckFileExists = false};
             var result = dialog.ShowDialog();
             if (result != DialogResult.OK) 
@@ -24,7 +24,7 @@ namespace AT_modemTest.Commands
                 return;
             }
             using var file = new System.IO.StreamWriter(dialog.FileName, false);
-            var message = Form.ScControl.Text;
+            var message = Form.ScLogControl.Text;
             file.Write(message);
         }
         }

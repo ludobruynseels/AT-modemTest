@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO.Ports;
-using System.Runtime.Remoting.Messaging;
 using System.Threading;
 using System.Windows.Forms;
 using AT_modemTest.Commands;
@@ -19,10 +18,13 @@ namespace AT_modemTest
 
         private void Form1_Load(object sender, EventArgs e)
         {
-                scintilla1.Margins[0].Type = MarginType.Number;
-                scintilla1.Margins[0].Width = 16;
+                scinLog.Margins[0].Type = MarginType.Number;
+                scinLog.Margins[0].Width = 16;
 
-                // Create a new SerialPort object with default settings.
+                scinScript.Margins[0].Type = MarginType.Number;
+                scinScript.Margins[0].Width = 16;
+
+            // Create a new SerialPort object with default settings.
             MySerialPort = new SerialPort
             {
                 PortName = "COM10",
@@ -52,11 +54,12 @@ namespace AT_modemTest
             MySerialPort.Write($"{cmdText}\r");
         }
 
-        public Scintilla ScControl => this.scintilla1;
+        public Scintilla ScLogControl => scinLog;
+        public Scintilla ScScriptControl => scinScript;
 
         public void ClearLog()
         {
-                scintilla1.ClearAll();
+                scinLog.ClearAll();
                 txtCommand.Text = string.Empty;
         }
 
@@ -68,7 +71,7 @@ namespace AT_modemTest
                 new Action(() =>
                 {
                     var data= ReadData(sender);
-                    scintilla1. InsertText(scintilla1.Text.Length, data);
+                    scinLog. InsertText(scinLog.Text.Length, data);
 
                     txtCommand.Text = string.Empty;
                 }));
@@ -84,12 +87,6 @@ namespace AT_modemTest
         {
             MySerialPort.Close();
             Thread.Sleep(500);
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            var s = "\u001a";
-            MySerialPort.Write(s);
         }
 
         private void txtCommand_KeyPress(object sender, KeyPressEventArgs e)
@@ -109,6 +106,12 @@ namespace AT_modemTest
         private void saveLogToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ICommand cmd = new SaveLogCommand(this);
+            cmd.Execute();
+        }
+
+        private void openScriptToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ICommand cmd = new OpenScriptCommand(this);
             cmd.Execute();
         }
     }

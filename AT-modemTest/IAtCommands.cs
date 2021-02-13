@@ -4,7 +4,8 @@ namespace AT_modemTest
 {
     public interface IAtCommands
     {
-        public Scintilla ScControl { get;  }
+        public Scintilla ScLogControl { get;  }
+        public Scintilla ScScriptControl { get; }
         void ClearLog();
     }
 }
