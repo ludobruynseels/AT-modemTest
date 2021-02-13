@@ -63,6 +63,12 @@ namespace AT_modemTest
                 txtCommand.Text = string.Empty;
         }
 
+        public void SendlineToModem(string s)
+        {
+            txtCommand.Text = s;
+            BtnSend_Click(txtCommand, null);
+        }
+
         private void DataReceivedHandler(
             object sender,
             SerialDataReceivedEventArgs e)
@@ -71,8 +77,8 @@ namespace AT_modemTest
                 new Action(() =>
                 {
                     var data= ReadData(sender);
-                    scinLog. InsertText(scinLog.Text.Length, data);
-
+                    scinLog.InsertText(scinLog.Text.Length, data);
+                    scinLog.ScrollRange(scinLog.TextLength, scinLog.TextLength);
                     txtCommand.Text = string.Empty;
                 }));
         }
@@ -112,6 +118,12 @@ namespace AT_modemTest
         private void openScriptToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ICommand cmd = new OpenScriptCommand(this);
+            cmd.Execute();
+        }
+
+        private void runScriptToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ICommand cmd = new RunScriptCommand(this);
             cmd.Execute();
         }
     }

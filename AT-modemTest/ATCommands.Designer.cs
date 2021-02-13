@@ -38,6 +38,7 @@
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.scinScript = new ScintillaNET.Scintilla();
+            this.runScriptToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -71,7 +72,7 @@
             this.scinLog.Margin = new System.Windows.Forms.Padding(25);
             this.scinLog.Name = "scinLog";
             this.scinLog.ScrollWidth = 500;
-            this.scinLog.Size = new System.Drawing.Size(266, 426);
+            this.scinLog.Size = new System.Drawing.Size(266, 375);
             this.scinLog.TabIndex = 4;
             // 
             // menuStrip1
@@ -89,6 +90,7 @@
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.saveLogToolStripMenuItem,
             this.openScriptToolStripMenuItem,
+            this.runScriptToolStripMenuItem,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
@@ -97,27 +99,26 @@
             // saveLogToolStripMenuItem
             // 
             this.saveLogToolStripMenuItem.Name = "saveLogToolStripMenuItem";
-            this.saveLogToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
+            this.saveLogToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.saveLogToolStripMenuItem.Text = "Save &log";
             this.saveLogToolStripMenuItem.Click += new System.EventHandler(this.saveLogToolStripMenuItem_Click);
             // 
             // openScriptToolStripMenuItem
             // 
             this.openScriptToolStripMenuItem.Name = "openScriptToolStripMenuItem";
-            this.openScriptToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
+            this.openScriptToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.openScriptToolStripMenuItem.Text = "Open &script";
             this.openScriptToolStripMenuItem.Click += new System.EventHandler(this.openScriptToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.exitToolStripMenuItem.Text = "E&xit";
             // 
             // splitContainer1
             // 
-            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer1.Location = new System.Drawing.Point(0, 24);
+            this.splitContainer1.Location = new System.Drawing.Point(0, 75);
             this.splitContainer1.Name = "splitContainer1";
             // 
             // splitContainer1.Panel1
@@ -127,7 +128,7 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.scinScript);
-            this.splitContainer1.Size = new System.Drawing.Size(800, 426);
+            this.splitContainer1.Size = new System.Drawing.Size(800, 375);
             this.splitContainer1.SplitterDistance = 266;
             this.splitContainer1.TabIndex = 7;
             // 
@@ -136,8 +137,15 @@
             this.scinScript.Dock = System.Windows.Forms.DockStyle.Fill;
             this.scinScript.Location = new System.Drawing.Point(0, 0);
             this.scinScript.Name = "scinScript";
-            this.scinScript.Size = new System.Drawing.Size(530, 426);
+            this.scinScript.Size = new System.Drawing.Size(530, 375);
             this.scinScript.TabIndex = 0;
+            // 
+            // runScriptToolStripMenuItem
+            // 
+            this.runScriptToolStripMenuItem.Name = "runScriptToolStripMenuItem";
+            this.runScriptToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.runScriptToolStripMenuItem.Text = "Run Script";
+            this.runScriptToolStripMenuItem.Click += new System.EventHandler(this.runScriptToolStripMenuItem_Click);
             // 
             // AtCommands
             // 
@@ -177,6 +185,7 @@
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private ScintillaNET.Scintilla scinScript;
+        private System.Windows.Forms.ToolStripMenuItem runScriptToolStripMenuItem;
     }
 }
 

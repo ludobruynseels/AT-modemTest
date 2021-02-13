@@ -7,5 +7,6 @@ namespace AT_modemTest
         public Scintilla ScLogControl { get;  }
         public Scintilla ScScriptControl { get; }
         void ClearLog();
+        void SendlineToModem(string s);
     }
 }
