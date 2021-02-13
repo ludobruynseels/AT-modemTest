@@ -1,19 +1,17 @@
-﻿using System;
-
-namespace AT_modemTest.Commands
+﻿namespace AT_modemTest.Commands
 {
-    class ClearLogCommand : ICommand
+   public class ClearLogCommand : ICommand
     {
-        private IAtCommands _form;
-
-        public ClearLogCommand(IAtCommands form)
+        public ClearLogCommand(IAtCommands atCommands)
         {
-            _form = form;
+            Form = atCommands;
         }
+
+        public IAtCommands Form { get; }
 
         public void Execute()
         {
-            _form.ClearLog();
+            Form.ClearLog();
         }
     }
 }

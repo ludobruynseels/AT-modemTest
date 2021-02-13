@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO.Ports;
+using System.Runtime.Remoting.Messaging;
 using System.Threading;
 using System.Windows.Forms;
 using AT_modemTest.Commands;
@@ -41,7 +42,7 @@ namespace AT_modemTest
         private void BtnSend_Click(object sender, EventArgs e)
         {
             var cmdText = txtCommand.Text;
-            if (!cmdText.StartsWith("AT"))
+            if (cmdText.StartsWith("CLR"))
             {
                ICommand cmd = new ClearLogCommand(this);
                cmd.Execute();
@@ -50,6 +51,8 @@ namespace AT_modemTest
             cmdText = cmdText.Replace("<^Z>", "\u001A");
             MySerialPort.Write($"{cmdText}\r");
         }
+
+        public Scintilla ScControl => this.scintilla1;
 
         public void ClearLog()
         {
@@ -103,6 +106,10 @@ namespace AT_modemTest
             }
         }
 
-
+        private void saveLogToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ICommand cmd = new SaveLogCommand(this);
+            cmd.Execute();
+        }
     }
 }
