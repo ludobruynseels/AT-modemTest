@@ -2,13 +2,14 @@
 using System.IO.Ports;
 using System.Threading;
 using System.Windows.Forms;
+using AT_modemTest.Commands;
 using ScintillaNET;
 
 namespace AT_modemTest
 {
-    public partial class Form1 : Form
+    public partial class AtCommands : Form, IAtCommands
     {
-        public Form1()
+        public AtCommands()
         {
             InitializeComponent();
         }
@@ -17,10 +18,13 @@ namespace AT_modemTest
 
         private void Form1_Load(object sender, EventArgs e)
         {
-                scintilla1.Margins[0].Type = MarginType.Number;
-                scintilla1.Margins[0].Width = 16;
+                scinLog.Margins[0].Type = MarginType.Number;
+                scinLog.Margins[0].Width = 16;
 
-                // Create a new SerialPort object with default settings.
+                scinScript.Margins[0].Type = MarginType.Number;
+                scinScript.Margins[0].Width = 16;
+
+            // Create a new SerialPort object with default settings.
             MySerialPort = new SerialPort
             {
                 PortName = "COM10",
@@ -39,9 +43,24 @@ namespace AT_modemTest
 
         private void BtnSend_Click(object sender, EventArgs e)
         {
-            var cmd = txtCommand.Text;
-            cmd = cmd.Replace("<^Z>", "\u001A");
-            MySerialPort.Write($"{cmd}\r");
+            var cmdText = txtCommand.Text;
+            if (cmdText.StartsWith("CLR"))
+            {
+               ICommand cmd = new ClearLogCommand(this);
+               cmd.Execute();
+            }
+
+            cmdText = cmdText.Replace("<^Z>", "\u001A");
+            MySerialPort.Write($"{cmdText}\r");
+        }
+
+        public Scintilla ScLogControl => scinLog;
+        public Scintilla ScScriptControl => scinScript;
+
+        public void ClearLog()
+        {
+                scinLog.ClearAll();
+                txtCommand.Text = string.Empty;
         }
 
         private void DataReceivedHandler(
@@ -52,7 +71,7 @@ namespace AT_modemTest
                 new Action(() =>
                 {
                     var data= ReadData(sender);
-                    scintilla1. InsertText(scintilla1.Text.Length, data);
+                    scinLog. InsertText(scinLog.Text.Length, data);
 
                     txtCommand.Text = string.Empty;
                 }));
@@ -70,18 +89,12 @@ namespace AT_modemTest
             Thread.Sleep(500);
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            var s = "\u001a";
-            MySerialPort.Write(s);
-        }
-
         private void txtCommand_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == '\u001a')
             {
                var textbox = (TextBox)sender;
-               textbox.Text += "<^Z>";
+               textbox.Text += @"<^Z>";
                e.Handled = true;
             }
             else
@@ -90,6 +103,16 @@ namespace AT_modemTest
             }
         }
 
+        private void saveLogToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ICommand cmd = new SaveLogCommand(this);
+            cmd.Execute();
+        }
 
+        private void openScriptToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ICommand cmd = new OpenScriptCommand(this);
+            cmd.Execute();
+        }
     }
 }
