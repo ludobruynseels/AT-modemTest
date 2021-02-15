@@ -18,11 +18,6 @@ namespace AT_modemTest.Commands
             foreach (var line in Form.ScScriptControl.Lines)
             {
                 var s = line.Text.Trim('\n');
-                //if (!s.ToUpper().StartsWith("AT+"))
-                //{
-                //    continue;
-                //}
-
                 Form.SendlineToModem(s);
                 Thread.Sleep(1500);
                 Application.DoEvents();
