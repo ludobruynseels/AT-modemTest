@@ -9,12 +9,14 @@ namespace AT_modemTest
 {
     public partial class AtCommands : Form, IAtCommands
     {
+        private string Portname { get;  set; } = "COM10";
+        private static SerialPort MySerialPort { get; set; }
+
         public AtCommands()
         {
             InitializeComponent();
         }
 
-        private static SerialPort MySerialPort { get; set; }
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -24,10 +26,17 @@ namespace AT_modemTest
                 scinScript.Margins[0].Type = MarginType.Number;
                 scinScript.Margins[0].Width = 16;
 
+                foreach (var portName in SerialPort.GetPortNames())
+                {
+                    toolStripComboBox1.Items.Add(portName);
+                }
+
+                toolStripComboBox1.SelectedItem = "COM10";
+
             // Create a new SerialPort object with default settings.
             MySerialPort = new SerialPort
             {
-                PortName = "COM10",
+                PortName = Portname,
                 BaudRate = 19200,
                 Parity = Parity.None,
                 DataBits = 8,
@@ -147,5 +156,32 @@ namespace AT_modemTest
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e) => this.Close();
+
+        private void toolStripComboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var cb = (ToolStripComboBox) sender;
+            var s = cb.SelectedItem;
+            Portname = (string) s;
+
+            if (MySerialPort == null)
+            {
+                return;
+            }
+
+            if (MySerialPort.IsOpen)
+            {
+                MySerialPort.Close();
+            }
+            
+            MySerialPort.PortName = (string) s;
+            try
+            {
+                MySerialPort.Open();
+            }
+            catch
+            {
+                MessageBox.Show($@"Cannot open port {s}", @"Probleempje", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }
