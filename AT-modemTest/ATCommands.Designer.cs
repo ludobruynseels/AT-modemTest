@@ -33,22 +33,22 @@
             this.logContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.copyCommandToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.clearWindowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveLogToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.scinScript = new ScintillaNET.Scintilla();
             this.scriptContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.copyCommandToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.runScriptToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.openScriptToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.label2 = new System.Windows.Forms.Label();
             this.copyCommandToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnSend = new System.Windows.Forms.Button();
             this.txtCommand = new System.Windows.Forms.TextBox();
-            this.saveLogToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.logContextMenu.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -77,7 +77,7 @@
             this.clearWindowToolStripMenuItem,
             this.saveLogToolStripMenuItem1});
             this.logContextMenu.Name = "logContextMenu";
-            this.logContextMenu.Size = new System.Drawing.Size(181, 92);
+            this.logContextMenu.Size = new System.Drawing.Size(163, 70);
             // 
             // copyCommandToolStripMenuItem1
             // 
@@ -92,6 +92,13 @@
             this.clearWindowToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
             this.clearWindowToolStripMenuItem.Text = "Clear window";
             this.clearWindowToolStripMenuItem.Click += new System.EventHandler(this.clearWindowToolStripMenuItem_Click);
+            // 
+            // saveLogToolStripMenuItem1
+            // 
+            this.saveLogToolStripMenuItem1.Name = "saveLogToolStripMenuItem1";
+            this.saveLogToolStripMenuItem1.Size = new System.Drawing.Size(162, 22);
+            this.saveLogToolStripMenuItem1.Text = "Save log";
+            this.saveLogToolStripMenuItem1.Click += new System.EventHandler(this.saveLogToolStripMenuItem1_Click);
             // 
             // menuStrip1
             // 
@@ -114,8 +121,9 @@
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.exitToolStripMenuItem.Text = "E&xit";
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
             // splitContainer1
             // 
@@ -146,17 +154,6 @@
             this.label1.Size = new System.Drawing.Size(136, 20);
             this.label1.TabIndex = 5;
             this.label1.Text = "at command log";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(0, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(156, 20);
-            this.label2.TabIndex = 6;
-            this.label2.Text = "at command script";
             // 
             // scinScript
             // 
@@ -197,6 +194,17 @@
             this.openScriptToolStripMenuItem1.Text = "Open Script";
             this.openScriptToolStripMenuItem1.Click += new System.EventHandler(this.openScriptToolStripMenuItem1_Click);
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(0, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(156, 20);
+            this.label2.TabIndex = 6;
+            this.label2.Text = "at command script";
+            // 
             // copyCommandToolStripMenuItem
             // 
             this.copyCommandToolStripMenuItem.Name = "copyCommandToolStripMenuItem";
@@ -231,13 +239,6 @@
             this.txtCommand.Size = new System.Drawing.Size(514, 20);
             this.txtCommand.TabIndex = 3;
             this.txtCommand.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCommand_KeyPress);
-            // 
-            // saveLogToolStripMenuItem1
-            // 
-            this.saveLogToolStripMenuItem1.Name = "saveLogToolStripMenuItem1";
-            this.saveLogToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
-            this.saveLogToolStripMenuItem1.Text = "Save log";
-            this.saveLogToolStripMenuItem1.Click += new System.EventHandler(this.saveLogToolStripMenuItem1_Click);
             // 
             // AtCommands
             // 

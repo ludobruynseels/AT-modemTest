@@ -113,15 +113,14 @@ namespace AT_modemTest
         {
             var control = scinLog;
             var cp = control.CurrentLine;
-            txtCommand.Text = control.Lines[cp].Text.Trim('\n'); ;
-
+            txtCommand.Text = control.Lines[cp].Text.Trim('\n');
         }
 
         private void copyCommandToolStripMenuItem2_Click(object sender, EventArgs e)
         {
             var control = scinScript;
             var cp = control.CurrentLine;
-            txtCommand.Text = control.Lines[cp].Text.Trim('\n'); ;
+            txtCommand.Text = control.Lines[cp].Text.Trim('\n'); 
         }
 
         private void clearWindowToolStripMenuItem_Click(object sender, EventArgs e)
@@ -146,5 +145,7 @@ namespace AT_modemTest
             ICommand cmd = new SaveLogCommand(this);
             cmd.Execute();
         }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e) => this.Close();
     }
 }
