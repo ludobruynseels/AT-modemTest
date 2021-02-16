@@ -115,15 +115,35 @@ namespace AT_modemTest
             cmd.Execute();
         }
 
-        private void openScriptToolStripMenuItem_Click(object sender, EventArgs e)
+        private void copyCommandToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            ICommand cmd = new OpenScriptCommand(this);
+            var control = scinLog;
+            var cp = control.CurrentLine;
+            txtCommand.Text = control.Lines[cp].Text.Trim('\n'); ;
+
+        }
+
+        private void copyCommandToolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            var control = scinScript;
+            var cp = control.CurrentLine;
+            txtCommand.Text = control.Lines[cp].Text.Trim('\n'); ;
+        }
+
+        private void clearWindowToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ClearLog();
+        }
+
+        private void runScriptToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            ICommand cmd = new RunScriptCommand(this);
             cmd.Execute();
         }
 
-        private void runScriptToolStripMenuItem_Click(object sender, EventArgs e)
+        private void openScriptToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            ICommand cmd = new RunScriptCommand(this);
+            ICommand cmd = new OpenScriptCommand(this);
             cmd.Execute();
         }
     }
