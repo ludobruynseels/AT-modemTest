@@ -36,7 +36,8 @@
             this.saveLogToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripComboBox1 = new System.Windows.Forms.ToolStripComboBox();
+            this.PortnameToolStripComboBox1 = new System.Windows.Forms.ToolStripComboBox();
+            this.BaudrateToolStripComboBox1 = new System.Windows.Forms.ToolStripComboBox();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.label1 = new System.Windows.Forms.Label();
@@ -114,18 +115,27 @@
             // fileToolStripMenuItem
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripComboBox1,
+            this.PortnameToolStripComboBox1,
+            this.BaudrateToolStripComboBox1,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "&File";
             // 
-            // toolStripComboBox1
+            // PortnameToolStripComboBox1
             // 
-            this.toolStripComboBox1.Name = "toolStripComboBox1";
-            this.toolStripComboBox1.Size = new System.Drawing.Size(121, 23);
-            this.toolStripComboBox1.Text = "COM";
-            this.toolStripComboBox1.SelectedIndexChanged += new System.EventHandler(this.toolStripComboBox1_SelectedIndexChanged);
+            this.PortnameToolStripComboBox1.Name = "PortnameToolStripComboBox1";
+            this.PortnameToolStripComboBox1.Size = new System.Drawing.Size(121, 23);
+            this.PortnameToolStripComboBox1.Text = "COM10";
+            this.PortnameToolStripComboBox1.ToolTipText = "Portname";
+            this.PortnameToolStripComboBox1.SelectedIndexChanged += new System.EventHandler(this.PortnameComboBox1_SelectedIndexChanged);
+            // 
+            // BaudrateToolStripComboBox1
+            // 
+            this.BaudrateToolStripComboBox1.Name = "BaudrateToolStripComboBox1";
+            this.BaudrateToolStripComboBox1.Size = new System.Drawing.Size(121, 23);
+            this.BaudrateToolStripComboBox1.Text = "19200";
+            this.BaudrateToolStripComboBox1.SelectedIndexChanged += new System.EventHandler(this.BaudrateToolStripComboBox1_SelectedIndexChanged);
             // 
             // exitToolStripMenuItem
             // 
@@ -301,7 +311,8 @@
         private System.Windows.Forms.ToolStripMenuItem runScriptToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem openScriptToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem saveLogToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripComboBox toolStripComboBox1;
+        private System.Windows.Forms.ToolStripComboBox PortnameToolStripComboBox1;
+        private System.Windows.Forms.ToolStripComboBox BaudrateToolStripComboBox1;
     }
 }
 

@@ -3,20 +3,19 @@ using System.IO.Ports;
 using System.Threading;
 using System.Windows.Forms;
 using AT_modemTest.Commands;
+using AT_modemTest.Properties;
 using ScintillaNET;
 
 namespace AT_modemTest
 {
     public partial class AtCommands : Form, IAtCommands
     {
-        private string Portname { get;  set; } = "COM10";
         private static SerialPort MySerialPort { get; set; }
 
         public AtCommands()
         {
             InitializeComponent();
         }
-
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -28,26 +27,44 @@ namespace AT_modemTest
 
                 foreach (var portName in SerialPort.GetPortNames())
                 {
-                    toolStripComboBox1.Items.Add(portName);
+                    PortnameToolStripComboBox1.Items.Add(portName);
                 }
 
-                toolStripComboBox1.SelectedItem = "COM10";
+                PortnameToolStripComboBox1.SelectedItem = Settings.Default.Portname;
+            
+            BaudrateToolStripComboBox1.Items.AddRange(new object[] {300, 1200, 2400, 4800, 9600, 19200, 38400, 57600, 115200});
+            BaudrateToolStripComboBox1.SelectedItem = Settings.Default.Baudrate;
 
-            // Create a new SerialPort object with default settings.
-            MySerialPort = new SerialPort
-            {
-                PortName = Portname,
-                BaudRate = 19200,
-                Parity = Parity.None,
-                DataBits = 8,
-                StopBits = StopBits.One,
-                Handshake = Handshake.None,
-                ReadTimeout = 500,
-                WriteTimeout = 500
-            };
+            MySerialPort = SerialPortFactory();
 
             MySerialPort.DataReceived += DataReceivedHandler;
             MySerialPort.Open();
+        }
+
+        private static SerialPort SerialPortFactory()
+        {
+            var mySerialPort = new SerialPort();
+
+            if (!string.IsNullOrEmpty(Settings.Default.Portname))
+            {
+                mySerialPort.PortName = Settings.Default.Portname;
+            }
+            else
+            {
+                mySerialPort.PortName = SerialPort.GetPortNames()[0];
+            }
+
+
+            mySerialPort.BaudRate = Settings.Default.Baudrate;
+            mySerialPort.Parity = Settings.Default.Parity;
+            mySerialPort.DataBits = Settings.Default.Databits;
+            mySerialPort.StopBits = Settings.Default.Stopbits;
+            mySerialPort.Handshake = Settings.Default.Handshake;
+
+            mySerialPort.ReadTimeout = 500;
+            mySerialPort.WriteTimeout = 500;
+
+            return mySerialPort;
         }
 
         private void BtnSend_Click(object sender, EventArgs e)
@@ -100,6 +117,8 @@ namespace AT_modemTest
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
+            Settings.Default.Save();
+
             MySerialPort.Close();
             Thread.Sleep(500);
         }
@@ -157,11 +176,11 @@ namespace AT_modemTest
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e) => this.Close();
 
-        private void toolStripComboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        private void PortnameComboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             var cb = (ToolStripComboBox) sender;
-            var s = cb.SelectedItem;
-            Portname = (string) s;
+            var s = (string) cb.SelectedItem;
+            Settings.Default.Portname = s;
 
             if (MySerialPort == null)
             {
@@ -173,7 +192,7 @@ namespace AT_modemTest
                 MySerialPort.Close();
             }
             
-            MySerialPort.PortName = (string) s;
+            MySerialPort.PortName = s;
             try
             {
                 MySerialPort.Open();
@@ -181,6 +200,32 @@ namespace AT_modemTest
             catch
             {
                 MessageBox.Show($@"Cannot open port {s}", @"Probleempje", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void BaudrateToolStripComboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var cb = (ToolStripComboBox)sender;
+            var br = (int) cb.SelectedItem;
+            Settings.Default.Baudrate = br;
+            if (MySerialPort == null)
+            {
+                return;
+            }
+
+            if (MySerialPort.IsOpen)
+            {
+                MySerialPort.Close();
+            }
+
+            MySerialPort.BaudRate = br;
+            try
+            {
+                MySerialPort.Open();
+            }
+            catch
+            {
+                MessageBox.Show($@"Cannot open port {MySerialPort.PortName}", @"Probleempje", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }
