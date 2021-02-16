@@ -35,7 +35,6 @@
             this.clearWindowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.saveLogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.label1 = new System.Windows.Forms.Label();
@@ -49,6 +48,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnSend = new System.Windows.Forms.Button();
             this.txtCommand = new System.Windows.Forms.TextBox();
+            this.saveLogToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.logContextMenu.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -74,9 +74,10 @@
             // 
             this.logContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.copyCommandToolStripMenuItem1,
-            this.clearWindowToolStripMenuItem});
+            this.clearWindowToolStripMenuItem,
+            this.saveLogToolStripMenuItem1});
             this.logContextMenu.Name = "logContextMenu";
-            this.logContextMenu.Size = new System.Drawing.Size(163, 48);
+            this.logContextMenu.Size = new System.Drawing.Size(181, 92);
             // 
             // copyCommandToolStripMenuItem1
             // 
@@ -105,18 +106,10 @@
             // fileToolStripMenuItem
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.saveLogToolStripMenuItem,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "&File";
-            // 
-            // saveLogToolStripMenuItem
-            // 
-            this.saveLogToolStripMenuItem.Name = "saveLogToolStripMenuItem";
-            this.saveLogToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
-            this.saveLogToolStripMenuItem.Text = "Save &log";
-            this.saveLogToolStripMenuItem.Click += new System.EventHandler(this.saveLogToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
@@ -239,6 +232,13 @@
             this.txtCommand.TabIndex = 3;
             this.txtCommand.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCommand_KeyPress);
             // 
+            // saveLogToolStripMenuItem1
+            // 
+            this.saveLogToolStripMenuItem1.Name = "saveLogToolStripMenuItem1";
+            this.saveLogToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.saveLogToolStripMenuItem1.Text = "Save log";
+            this.saveLogToolStripMenuItem1.Click += new System.EventHandler(this.saveLogToolStripMenuItem1_Click);
+            // 
             // AtCommands
             // 
             this.AcceptButton = this.btnSend;
@@ -274,7 +274,6 @@
         private ScintillaNET.Scintilla scinLog;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem saveLogToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private ScintillaNET.Scintilla scinScript;
@@ -291,6 +290,7 @@
         private System.Windows.Forms.ToolStripMenuItem clearWindowToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem runScriptToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem openScriptToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem saveLogToolStripMenuItem1;
     }
 }
 

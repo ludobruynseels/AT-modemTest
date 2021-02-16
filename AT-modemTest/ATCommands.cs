@@ -109,12 +109,6 @@ namespace AT_modemTest
             }
         }
 
-        private void saveLogToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            ICommand cmd = new SaveLogCommand(this);
-            cmd.Execute();
-        }
-
         private void copyCommandToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             var control = scinLog;
@@ -144,6 +138,12 @@ namespace AT_modemTest
         private void openScriptToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             ICommand cmd = new OpenScriptCommand(this);
+            cmd.Execute();
+        }
+
+        private void saveLogToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            ICommand cmd = new SaveLogCommand(this);
             cmd.Execute();
         }
     }
