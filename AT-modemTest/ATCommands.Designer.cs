@@ -51,6 +51,9 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnSend = new System.Windows.Forms.Button();
             this.txtCommand = new System.Windows.Forms.TextBox();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.statusPortname = new System.Windows.Forms.ToolStripStatusLabel();
+            this.statusBaudrate = new System.Windows.Forms.ToolStripStatusLabel();
             this.logContextMenu.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -59,6 +62,7 @@
             this.splitContainer1.SuspendLayout();
             this.scriptContextMenu.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // scinLog
@@ -69,7 +73,7 @@
             this.scinLog.Margin = new System.Windows.Forms.Padding(25);
             this.scinLog.Name = "scinLog";
             this.scinLog.ScrollWidth = 500;
-            this.scinLog.Size = new System.Drawing.Size(266, 373);
+            this.scinLog.Size = new System.Drawing.Size(266, 351);
             this.scinLog.TabIndex = 4;
             // 
             // logContextMenu
@@ -159,7 +163,7 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.scinScript);
             this.splitContainer1.Panel2.Controls.Add(this.label2);
-            this.splitContainer1.Size = new System.Drawing.Size(800, 393);
+            this.splitContainer1.Size = new System.Drawing.Size(800, 371);
             this.splitContainer1.SplitterDistance = 266;
             this.splitContainer1.TabIndex = 7;
             // 
@@ -180,7 +184,7 @@
             this.scinScript.Dock = System.Windows.Forms.DockStyle.Fill;
             this.scinScript.Location = new System.Drawing.Point(0, 20);
             this.scinScript.Name = "scinScript";
-            this.scinScript.Size = new System.Drawing.Size(530, 373);
+            this.scinScript.Size = new System.Drawing.Size(530, 351);
             this.scinScript.TabIndex = 0;
             // 
             // scriptContextMenu
@@ -259,6 +263,29 @@
             this.txtCommand.TabIndex = 3;
             this.txtCommand.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCommand_KeyPress);
             // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.statusPortname,
+            this.statusBaudrate});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 428);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(800, 22);
+            this.statusStrip1.TabIndex = 9;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // statusPortname
+            // 
+            this.statusPortname.Name = "statusPortname";
+            this.statusPortname.Size = new System.Drawing.Size(118, 17);
+            this.statusPortname.Text = "toolStripStatusLabel1";
+            // 
+            // statusBaudrate
+            // 
+            this.statusBaudrate.Name = "statusBaudrate";
+            this.statusBaudrate.Size = new System.Drawing.Size(118, 17);
+            this.statusBaudrate.Text = "toolStripStatusLabel2";
+            // 
             // AtCommands
             // 
             this.AcceptButton = this.btnSend;
@@ -268,6 +295,7 @@
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.menuStrip1);
+            this.Controls.Add(this.statusStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "AtCommands";
             this.Text = "AT commands";
@@ -285,6 +313,8 @@
             this.scriptContextMenu.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -313,6 +343,9 @@
         private System.Windows.Forms.ToolStripMenuItem saveLogToolStripMenuItem1;
         private System.Windows.Forms.ToolStripComboBox PortnameToolStripComboBox1;
         private System.Windows.Forms.ToolStripComboBox BaudrateToolStripComboBox1;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripStatusLabel statusPortname;
+        private System.Windows.Forms.ToolStripStatusLabel statusBaudrate;
     }
 }
 

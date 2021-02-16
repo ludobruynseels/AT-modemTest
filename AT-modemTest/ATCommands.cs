@@ -31,7 +31,9 @@ namespace AT_modemTest
                 }
 
                 PortnameToolStripComboBox1.SelectedItem = Settings.Default.Portname;
-            
+                
+
+
             BaudrateToolStripComboBox1.Items.AddRange(new object[] {300, 1200, 2400, 4800, 9600, 19200, 38400, 57600, 115200});
             BaudrateToolStripComboBox1.SelectedItem = Settings.Default.Baudrate;
 
@@ -181,6 +183,7 @@ namespace AT_modemTest
             var cb = (ToolStripComboBox) sender;
             var s = (string) cb.SelectedItem;
             Settings.Default.Portname = s;
+            statusPortname.Text = Settings.Default.Portname;
 
             if (MySerialPort == null)
             {
@@ -208,6 +211,8 @@ namespace AT_modemTest
             var cb = (ToolStripComboBox)sender;
             var br = (int) cb.SelectedItem;
             Settings.Default.Baudrate = br;
+            statusBaudrate.Text = br.ToString();
+
             if (MySerialPort == null)
             {
                 return;
