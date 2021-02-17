@@ -30,7 +30,7 @@ namespace AT_modemTest.Commands
                 return;
             }
             using var file = new System.IO.StreamReader(dialog.FileName, false);
-            Form.ScLogControl.Text = "";
+            Form.ScScriptControl.Text = "";
             while (!file.EndOfStream) 
             {
              var s =   file.ReadLine();

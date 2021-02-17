@@ -46,6 +46,7 @@
             this.copyCommandToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.runScriptToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.openScriptToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveScriptToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label2 = new System.Windows.Forms.Label();
             this.copyCommandToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -54,7 +55,7 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.statusPortname = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusBaudrate = new System.Windows.Forms.ToolStripStatusLabel();
-            this.saveScriptToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.statusModemCommand = new System.Windows.Forms.ToolStripStatusLabel();
             this.logContextMenu.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -74,7 +75,7 @@
             this.scinLog.Margin = new System.Windows.Forms.Padding(25);
             this.scinLog.Name = "scinLog";
             this.scinLog.ScrollWidth = 500;
-            this.scinLog.Size = new System.Drawing.Size(266, 351);
+            this.scinLog.Size = new System.Drawing.Size(430, 351);
             this.scinLog.TabIndex = 4;
             // 
             // logContextMenu
@@ -165,7 +166,7 @@
             this.splitContainer1.Panel2.Controls.Add(this.scinScript);
             this.splitContainer1.Panel2.Controls.Add(this.label2);
             this.splitContainer1.Size = new System.Drawing.Size(800, 371);
-            this.splitContainer1.SplitterDistance = 266;
+            this.splitContainer1.SplitterDistance = 430;
             this.splitContainer1.TabIndex = 7;
             // 
             // label1
@@ -185,7 +186,7 @@
             this.scinScript.Dock = System.Windows.Forms.DockStyle.Fill;
             this.scinScript.Location = new System.Drawing.Point(0, 20);
             this.scinScript.Name = "scinScript";
-            this.scinScript.Size = new System.Drawing.Size(530, 351);
+            this.scinScript.Size = new System.Drawing.Size(366, 351);
             this.scinScript.TabIndex = 0;
             // 
             // scriptContextMenu
@@ -196,28 +197,35 @@
             this.openScriptToolStripMenuItem1,
             this.saveScriptToolStripMenuItem});
             this.scriptContextMenu.Name = "scriptContextMenu";
-            this.scriptContextMenu.Size = new System.Drawing.Size(181, 114);
+            this.scriptContextMenu.Size = new System.Drawing.Size(161, 92);
             // 
             // copyCommandToolStripMenuItem2
             // 
             this.copyCommandToolStripMenuItem2.Name = "copyCommandToolStripMenuItem2";
-            this.copyCommandToolStripMenuItem2.Size = new System.Drawing.Size(180, 22);
+            this.copyCommandToolStripMenuItem2.Size = new System.Drawing.Size(160, 22);
             this.copyCommandToolStripMenuItem2.Text = "Copy command";
             this.copyCommandToolStripMenuItem2.Click += new System.EventHandler(this.copyCommandToolStripMenuItem2_Click);
             // 
             // runScriptToolStripMenuItem1
             // 
             this.runScriptToolStripMenuItem1.Name = "runScriptToolStripMenuItem1";
-            this.runScriptToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.runScriptToolStripMenuItem1.Size = new System.Drawing.Size(160, 22);
             this.runScriptToolStripMenuItem1.Text = "Run Script";
             this.runScriptToolStripMenuItem1.Click += new System.EventHandler(this.runScriptToolStripMenuItem1_Click);
             // 
             // openScriptToolStripMenuItem1
             // 
             this.openScriptToolStripMenuItem1.Name = "openScriptToolStripMenuItem1";
-            this.openScriptToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.openScriptToolStripMenuItem1.Size = new System.Drawing.Size(160, 22);
             this.openScriptToolStripMenuItem1.Text = "Open Script";
             this.openScriptToolStripMenuItem1.Click += new System.EventHandler(this.openScriptToolStripMenuItem1_Click);
+            // 
+            // saveScriptToolStripMenuItem
+            // 
+            this.saveScriptToolStripMenuItem.Name = "saveScriptToolStripMenuItem";
+            this.saveScriptToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.saveScriptToolStripMenuItem.Text = "Save Script";
+            this.saveScriptToolStripMenuItem.Click += new System.EventHandler(this.saveScriptToolStripMenuItem_Click);
             // 
             // label2
             // 
@@ -269,7 +277,8 @@
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.statusPortname,
-            this.statusBaudrate});
+            this.statusBaudrate,
+            this.statusModemCommand});
             this.statusStrip1.Location = new System.Drawing.Point(0, 428);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(800, 22);
@@ -288,12 +297,11 @@
             this.statusBaudrate.Size = new System.Drawing.Size(118, 17);
             this.statusBaudrate.Text = "toolStripStatusLabel2";
             // 
-            // saveScriptToolStripMenuItem
+            // statusModemCommand
             // 
-            this.saveScriptToolStripMenuItem.Name = "saveScriptToolStripMenuItem";
-            this.saveScriptToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.saveScriptToolStripMenuItem.Text = "Save Script";
-            this.saveScriptToolStripMenuItem.Click += new System.EventHandler(this.saveScriptToolStripMenuItem_Click);
+            this.statusModemCommand.Name = "statusModemCommand";
+            this.statusModemCommand.Size = new System.Drawing.Size(18, 17);
+            this.statusModemCommand.Text = "sa";
             // 
             // AtCommands
             // 
@@ -356,6 +364,7 @@
         private System.Windows.Forms.ToolStripStatusLabel statusPortname;
         private System.Windows.Forms.ToolStripStatusLabel statusBaudrate;
         private System.Windows.Forms.ToolStripMenuItem saveScriptToolStripMenuItem;
+        private System.Windows.Forms.ToolStripStatusLabel statusModemCommand;
     }
 }
 
