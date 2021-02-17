@@ -90,6 +90,12 @@ namespace AT_modemTest
             }
 
             cmdText = cmdText.Replace("<^Z>", "\u001A");
+
+            if (!MySerialPort.IsOpen)
+            {
+                MySerialPort.Open();
+            }
+
             MySerialPort.Write($"{cmdText}\r");
             ModemStatus = Status.Running;
         }

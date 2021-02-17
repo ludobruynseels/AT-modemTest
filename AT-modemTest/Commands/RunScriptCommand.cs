@@ -14,23 +14,33 @@ namespace AT_modemTest.Commands
         public void Execute()
         {
             foreach (var line in Form.ScScriptControl.Lines)
-            {
+            {     
                 var s = line.Text.Trim('\n');
+                
                 if (s.Length == 0)
                 {
                     continue;
                 }
 
-                Form.SendlineToModem(s);
-
-                Thread.Sleep(1000);
-                Application.DoEvents();
+                if (s.StartsWith("//"))
+                {
+                    continue;
+                }
 
                 if (Form.ModemStatus == Status.Error)
                 {
                     return;
                 }
+                
+                if (s.ToUpper() == "WAIT")
+                {
+                    Thread.Sleep(2000);
+                    continue;
+                }
 
+                Form.SendlineToModem(s);
+                Application.DoEvents();
+                
                 while (Form.ModemStatus == Status.Running)
                 {
                     Thread.Sleep(250);

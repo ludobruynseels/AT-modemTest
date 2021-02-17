@@ -75,7 +75,7 @@
             this.scinLog.Margin = new System.Windows.Forms.Padding(25);
             this.scinLog.Name = "scinLog";
             this.scinLog.ScrollWidth = 500;
-            this.scinLog.Size = new System.Drawing.Size(266, 351);
+            this.scinLog.Size = new System.Drawing.Size(430, 351);
             this.scinLog.TabIndex = 4;
             // 
             // logContextMenu
@@ -166,7 +166,7 @@
             this.splitContainer1.Panel2.Controls.Add(this.scinScript);
             this.splitContainer1.Panel2.Controls.Add(this.label2);
             this.splitContainer1.Size = new System.Drawing.Size(800, 371);
-            this.splitContainer1.SplitterDistance = 266;
+            this.splitContainer1.SplitterDistance = 430;
             this.splitContainer1.TabIndex = 7;
             // 
             // label1
@@ -186,7 +186,7 @@
             this.scinScript.Dock = System.Windows.Forms.DockStyle.Fill;
             this.scinScript.Location = new System.Drawing.Point(0, 20);
             this.scinScript.Name = "scinScript";
-            this.scinScript.Size = new System.Drawing.Size(530, 351);
+            this.scinScript.Size = new System.Drawing.Size(366, 351);
             this.scinScript.TabIndex = 0;
             // 
             // scriptContextMenu
