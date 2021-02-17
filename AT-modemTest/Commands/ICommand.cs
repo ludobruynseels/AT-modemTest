@@ -1,4 +1,4 @@
-﻿namespace AT_modemTest
+﻿namespace AT_modemTest.Commands
 {
     public interface ICommand
     {

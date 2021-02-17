@@ -54,6 +54,7 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.statusPortname = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusBaudrate = new System.Windows.Forms.ToolStripStatusLabel();
+            this.saveScriptToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.logContextMenu.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -192,28 +193,29 @@
             this.scriptContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.copyCommandToolStripMenuItem2,
             this.runScriptToolStripMenuItem1,
-            this.openScriptToolStripMenuItem1});
+            this.openScriptToolStripMenuItem1,
+            this.saveScriptToolStripMenuItem});
             this.scriptContextMenu.Name = "scriptContextMenu";
-            this.scriptContextMenu.Size = new System.Drawing.Size(161, 70);
+            this.scriptContextMenu.Size = new System.Drawing.Size(181, 114);
             // 
             // copyCommandToolStripMenuItem2
             // 
             this.copyCommandToolStripMenuItem2.Name = "copyCommandToolStripMenuItem2";
-            this.copyCommandToolStripMenuItem2.Size = new System.Drawing.Size(160, 22);
+            this.copyCommandToolStripMenuItem2.Size = new System.Drawing.Size(180, 22);
             this.copyCommandToolStripMenuItem2.Text = "Copy command";
             this.copyCommandToolStripMenuItem2.Click += new System.EventHandler(this.copyCommandToolStripMenuItem2_Click);
             // 
             // runScriptToolStripMenuItem1
             // 
             this.runScriptToolStripMenuItem1.Name = "runScriptToolStripMenuItem1";
-            this.runScriptToolStripMenuItem1.Size = new System.Drawing.Size(160, 22);
+            this.runScriptToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.runScriptToolStripMenuItem1.Text = "Run Script";
             this.runScriptToolStripMenuItem1.Click += new System.EventHandler(this.runScriptToolStripMenuItem1_Click);
             // 
             // openScriptToolStripMenuItem1
             // 
             this.openScriptToolStripMenuItem1.Name = "openScriptToolStripMenuItem1";
-            this.openScriptToolStripMenuItem1.Size = new System.Drawing.Size(160, 22);
+            this.openScriptToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.openScriptToolStripMenuItem1.Text = "Open Script";
             this.openScriptToolStripMenuItem1.Click += new System.EventHandler(this.openScriptToolStripMenuItem1_Click);
             // 
@@ -286,6 +288,13 @@
             this.statusBaudrate.Size = new System.Drawing.Size(118, 17);
             this.statusBaudrate.Text = "toolStripStatusLabel2";
             // 
+            // saveScriptToolStripMenuItem
+            // 
+            this.saveScriptToolStripMenuItem.Name = "saveScriptToolStripMenuItem";
+            this.saveScriptToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.saveScriptToolStripMenuItem.Text = "Save Script";
+            this.saveScriptToolStripMenuItem.Click += new System.EventHandler(this.saveScriptToolStripMenuItem_Click);
+            // 
             // AtCommands
             // 
             this.AcceptButton = this.btnSend;
@@ -346,6 +355,7 @@
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel statusPortname;
         private System.Windows.Forms.ToolStripStatusLabel statusBaudrate;
+        private System.Windows.Forms.ToolStripMenuItem saveScriptToolStripMenuItem;
     }
 }
 

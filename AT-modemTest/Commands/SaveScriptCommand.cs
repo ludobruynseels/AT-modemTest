@@ -3,21 +3,22 @@ using System.Windows.Forms;
 
 namespace AT_modemTest.Commands
 {
-    internal class OpenScriptCommand : ICommand
+    internal class SaveScriptCommand : ICommand
     {
-        public OpenScriptCommand(IAtCommands form)
+        public SaveScriptCommand(IAtCommands atCommands)
         {
-            Form = form;
+            Form = atCommands;
         }
 
         public IAtCommands Form { get; }
+
         public void Execute()
         {
             var path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
 
-            var dialog = new OpenFileDialog()
+            var dialog = new SaveFileDialog()
             {
-                DefaultExt = "atl",
+                DefaultExt = "ats",
                 InitialDirectory = path,
                 Filter = @"at script files (*.ats)|*.ats|All files (*.*)|*.*",
                 FilterIndex = 1,
@@ -29,13 +30,9 @@ namespace AT_modemTest.Commands
             {
                 return;
             }
-            using var file = new System.IO.StreamReader(dialog.FileName, false);
-            Form.ScLogControl.Text = "";
-            while (!file.EndOfStream) 
-            {
-             var s =   file.ReadLine();
-             Form.ScScriptControl.InsertText(Form.ScScriptControl.Text.Length, s + '\n');
-            }
+            using var file = new System.IO.StreamWriter(dialog.FileName, false);
+            var message = Form.ScLogControl.Text;
+            file.Write(message);
         }
     }
 }

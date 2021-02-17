@@ -233,5 +233,11 @@ namespace AT_modemTest
                 MessageBox.Show($@"Cannot open port {MySerialPort.PortName}", @"Probleempje", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void saveScriptToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ICommand cmd = new SaveScriptCommand(this);
+            cmd.Execute();
+        }
     }
 }

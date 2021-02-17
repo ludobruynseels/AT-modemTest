@@ -51,6 +51,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\SaveScriptCommand.cs" />
     <Compile Include="Commands\OpenScriptCommand.cs" />
     <Compile Include="Commands\ClearLogCommand.cs" />
     <Compile Include="ATCommands.cs">

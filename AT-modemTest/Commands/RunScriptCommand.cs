@@ -1,6 +1,4 @@
-﻿using System;
-using System.Net.Mime;
-using System.Threading;
+﻿using System.Threading;
 using System.Windows.Forms;
 
 namespace AT_modemTest.Commands
