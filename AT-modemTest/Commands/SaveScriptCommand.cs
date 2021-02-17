@@ -31,7 +31,7 @@ namespace AT_modemTest.Commands
                 return;
             }
             using var file = new System.IO.StreamWriter(dialog.FileName, false);
-            var message = Form.ScLogControl.Text;
+            var message = Form.ScScriptControl.Text;
             file.Write(message);
         }
     }
