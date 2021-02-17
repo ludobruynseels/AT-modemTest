@@ -2,6 +2,7 @@
 using System.IO.Ports;
 using System.Threading;
 using System.Windows.Forms;
+using System.Windows.Forms.VisualStyles;
 using AT_modemTest.Commands;
 using AT_modemTest.Properties;
 using ScintillaNET;
@@ -11,6 +12,16 @@ namespace AT_modemTest
     public partial class AtCommands : Form, IAtCommands
     {
         private static SerialPort MySerialPort { get; set; }
+        private Status _modemStatus;
+
+        public Status ModemStatus {
+            get => _modemStatus;
+            set
+            {
+                _modemStatus = value;
+                statusModemCommand.Text = _modemStatus.ToString();
+            }
+        } 
 
         public AtCommands()
         {
@@ -31,8 +42,8 @@ namespace AT_modemTest
                 }
 
                 PortnameToolStripComboBox1.SelectedItem = Settings.Default.Portname;
-                
 
+                ModemStatus = Status.Idle;
 
             BaudrateToolStripComboBox1.Items.AddRange(new object[] {300, 1200, 2400, 4800, 9600, 19200, 38400, 57600, 115200});
             BaudrateToolStripComboBox1.SelectedItem = Settings.Default.Baudrate;
@@ -80,6 +91,7 @@ namespace AT_modemTest
 
             cmdText = cmdText.Replace("<^Z>", "\u001A");
             MySerialPort.Write($"{cmdText}\r");
+            ModemStatus = Status.Running;
         }
 
         public Scintilla ScLogControl => scinLog;
@@ -105,9 +117,26 @@ namespace AT_modemTest
                 new Action(() =>
                 {
                     var data= ReadData(sender);
-                    scinLog.InsertText(scinLog.Text.Length, data);
+                   var message = string.Format("{0} - {1}", DateTime.Now, data);
+                    scinLog.InsertText(scinLog.Text.Length, message);
                     scinLog.ScrollRange(scinLog.TextLength, scinLog.TextLength);
                     txtCommand.Text = string.Empty;
+
+                    if (data.ToUpper().Contains("OK"))
+                    {
+                        ModemStatus = Status.OK;
+                        return;
+                    }
+                    if (data.ToUpper().Contains("ERROR"))
+                    {
+                        ModemStatus = Status.Error;
+                        return;
+                    }
+
+                    if (data.ToUpper().Contains(">") )
+                    {
+                        ModemStatus = Status.Prompt;
+                    }
                 }));
         }
 
