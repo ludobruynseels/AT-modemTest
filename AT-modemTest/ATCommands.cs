@@ -119,12 +119,12 @@ namespace AT_modemTest
             object sender,
             SerialDataReceivedEventArgs e)
         {
-            txtCommand.Invoke(
+            txtCommand.Invoke(  
                 new Action(() =>
                 {
                     var data= ReadData(sender);
-                   var message = string.Format("{0} - {1}", DateTime.Now, data);
-                    scinLog.InsertText(scinLog.Text.Length, message);
+                  // var message = string.Format("{0} - {1}", DateTime.Now, data);
+                    scinLog.InsertText(scinLog.Text.Length, data);
                     scinLog.ScrollRange(scinLog.TextLength, scinLog.TextLength);
                     txtCommand.Text = string.Empty;
 
