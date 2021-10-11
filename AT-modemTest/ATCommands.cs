@@ -1,83 +1,42 @@
 ﻿using System;
 using System.IO.Ports;
+using System.Runtime.Remoting.Messaging;
 using System.Threading;
 using System.Windows.Forms;
-using System.Windows.Forms.VisualStyles;
 using AT_modemTest.Commands;
-using AT_modemTest.Properties;
 using ScintillaNET;
 
 namespace AT_modemTest
 {
     public partial class AtCommands : Form, IAtCommands
     {
-        private static SerialPort MySerialPort { get; set; }
-        private Status _modemStatus;
-
-        public Status ModemStatus {
-            get => _modemStatus;
-            set
-            {
-                _modemStatus = value;
-                statusModemCommand.Text = _modemStatus.ToString();
-            }
-        } 
-
         public AtCommands()
         {
             InitializeComponent();
         }
 
+        private static SerialPort MySerialPort { get; set; }
+
         private void Form1_Load(object sender, EventArgs e)
         {
-                scinLog.Margins[0].Type = MarginType.Number;
-                scinLog.Margins[0].Width = 16;
+                scintilla1.Margins[0].Type = MarginType.Number;
+                scintilla1.Margins[0].Width = 16;
 
-                scinScript.Margins[0].Type = MarginType.Number;
-                scinScript.Margins[0].Width = 16;
-
-                foreach (var portName in SerialPort.GetPortNames())
-                {
-                    PortnameToolStripComboBox1.Items.Add(portName);
-                }
-
-                PortnameToolStripComboBox1.SelectedItem = Settings.Default.Portname;
-
-                ModemStatus = Status.Idle;
-
-            BaudrateToolStripComboBox1.Items.AddRange(new object[] {300, 1200, 2400, 4800, 9600, 19200, 38400, 57600, 115200});
-            BaudrateToolStripComboBox1.SelectedItem = Settings.Default.Baudrate;
-
-            MySerialPort = SerialPortFactory();
+                // Create a new SerialPort object with default settings.
+            MySerialPort = new SerialPort
+            {
+                PortName = "COM10",
+                BaudRate = 19200,
+                Parity = Parity.None,
+                DataBits = 8,
+                StopBits = StopBits.One,
+                Handshake = Handshake.None,
+                ReadTimeout = 500,
+                WriteTimeout = 500
+            };
 
             MySerialPort.DataReceived += DataReceivedHandler;
             MySerialPort.Open();
-        }
-
-        private static SerialPort SerialPortFactory()
-        {
-            var mySerialPort = new SerialPort();
-
-            if (!string.IsNullOrEmpty(Settings.Default.Portname))
-            {
-                mySerialPort.PortName = Settings.Default.Portname;
-            }
-            else
-            {
-                mySerialPort.PortName = SerialPort.GetPortNames()[0];
-            }
-
-
-            mySerialPort.BaudRate = Settings.Default.Baudrate;
-            mySerialPort.Parity = Settings.Default.Parity;
-            mySerialPort.DataBits = Settings.Default.Databits;
-            mySerialPort.StopBits = Settings.Default.Stopbits;
-            mySerialPort.Handshake = Settings.Default.Handshake;
-
-            mySerialPort.ReadTimeout = 500;
-            mySerialPort.WriteTimeout = 500;
-
-            return mySerialPort;
         }
 
         private void BtnSend_Click(object sender, EventArgs e)
@@ -90,59 +49,28 @@ namespace AT_modemTest
             }
 
             cmdText = cmdText.Replace("<^Z>", "\u001A");
-
-            if (!MySerialPort.IsOpen)
-            {
-                MySerialPort.Open();
-            }
-
             MySerialPort.Write($"{cmdText}\r");
-            ModemStatus = Status.Running;
         }
 
-        public Scintilla ScLogControl => scinLog;
-        public Scintilla ScScriptControl => scinScript;
+        public Scintilla ScControl => this.scintilla1;
 
         public void ClearLog()
         {
-                scinLog.ClearAll();
+                scintilla1.ClearAll();
                 txtCommand.Text = string.Empty;
-        }
-
-        public void SendlineToModem(string s)
-        {
-            txtCommand.Text = s;
-            BtnSend_Click(txtCommand, null);
         }
 
         private void DataReceivedHandler(
             object sender,
             SerialDataReceivedEventArgs e)
         {
-            txtCommand.Invoke(  
+            txtCommand.Invoke(
                 new Action(() =>
                 {
                     var data= ReadData(sender);
-                  // var message = string.Format("{0} - {1}", DateTime.Now, data);
-                    scinLog.InsertText(scinLog.Text.Length, data);
-                    scinLog.ScrollRange(scinLog.TextLength, scinLog.TextLength);
+                    scintilla1. InsertText(scintilla1.Text.Length, data);
+
                     txtCommand.Text = string.Empty;
-
-                    if (data.ToUpper().Contains("OK"))
-                    {
-                        ModemStatus = Status.OK;
-                        return;
-                    }
-                    if (data.ToUpper().Contains("ERROR"))
-                    {
-                        ModemStatus = Status.Error;
-                        return;
-                    }
-
-                    if (data.ToUpper().Contains(">") )
-                    {
-                        ModemStatus = Status.Prompt;
-                    }
                 }));
         }
 
@@ -154,10 +82,14 @@ namespace AT_modemTest
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            Settings.Default.Save();
-
             MySerialPort.Close();
             Thread.Sleep(500);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            var s = "\u001a";
+            MySerialPort.Write(s);
         }
 
         private void txtCommand_KeyPress(object sender, KeyPressEventArgs e)
@@ -174,104 +106,9 @@ namespace AT_modemTest
             }
         }
 
-        private void copyCommandToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-            var control = scinLog;
-            var cp = control.CurrentLine;
-            txtCommand.Text = control.Lines[cp].Text.Trim('\n');
-        }
-
-        private void copyCommandToolStripMenuItem2_Click(object sender, EventArgs e)
-        {
-            var control = scinScript;
-            var cp = control.CurrentLine;
-            txtCommand.Text = control.Lines[cp].Text.Trim('\n'); 
-        }
-
-        private void clearWindowToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            ClearLog();
-        }
-
-        private void runScriptToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-            ICommand cmd = new RunScriptCommand(this);
-            cmd.Execute();
-        }
-
-        private void openScriptToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-            ICommand cmd = new OpenScriptCommand(this);
-            cmd.Execute();
-        }
-
-        private void saveLogToolStripMenuItem1_Click(object sender, EventArgs e)
+        private void saveLogToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ICommand cmd = new SaveLogCommand(this);
-            cmd.Execute();
-        }
-
-        private void exitToolStripMenuItem_Click(object sender, EventArgs e) => this.Close();
-
-        private void PortnameComboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            var cb = (ToolStripComboBox) sender;
-            var s = (string) cb.SelectedItem;
-            Settings.Default.Portname = s;
-            statusPortname.Text = Settings.Default.Portname;
-
-            if (MySerialPort == null)
-            {
-                return;
-            }
-
-            if (MySerialPort.IsOpen)
-            {
-                MySerialPort.Close();
-            }
-            
-            MySerialPort.PortName = s;
-            try
-            {
-                MySerialPort.Open();
-            }
-            catch
-            {
-                MessageBox.Show($@"Cannot open port {s}", @"Probleempje", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void BaudrateToolStripComboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            var cb = (ToolStripComboBox)sender;
-            var br = (int) cb.SelectedItem;
-            Settings.Default.Baudrate = br;
-            statusBaudrate.Text = br.ToString();
-
-            if (MySerialPort == null)
-            {
-                return;
-            }
-
-            if (MySerialPort.IsOpen)
-            {
-                MySerialPort.Close();
-            }
-
-            MySerialPort.BaudRate = br;
-            try
-            {
-                MySerialPort.Open();
-            }
-            catch
-            {
-                MessageBox.Show($@"Cannot open port {MySerialPort.PortName}", @"Probleempje", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void saveScriptToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            ICommand cmd = new SaveScriptCommand(this);
             cmd.Execute();
         }
     }

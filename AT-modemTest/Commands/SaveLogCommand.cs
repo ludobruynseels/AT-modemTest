@@ -1,5 +1,4 @@
-﻿using System;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 
 namespace AT_modemTest.Commands
 {
@@ -14,17 +13,15 @@ namespace AT_modemTest.Commands
 
         public void Execute()
         {
-            var path =  Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-
-            var dialog = new SaveFileDialog() {DefaultExt = "atl", InitialDirectory = path, Filter = @"at log files (*.atl)|*.atl|All files (*.*)|*.*", 
-                FilterIndex = 1, RestoreDirectory = true , CheckFileExists = false};
+            var dialog = new OpenFileDialog() {DefaultExt = "atl", InitialDirectory = "c:\\", Filter = "atl files (*.atl)|*.atl|All files (*.*)|*.*", 
+                FilterIndex = 2, RestoreDirectory = true , CheckFileExists = false};
             var result = dialog.ShowDialog();
             if (result != DialogResult.OK) 
             {
                 return;
             }
             using var file = new System.IO.StreamWriter(dialog.FileName, false);
-            var message = Form.ScLogControl.Text;
+            var message = Form.ScControl.Text;
             file.Write(message);
         }
         }
